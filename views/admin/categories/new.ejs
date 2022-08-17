@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeveloperBlog | New Category</title>
+
+    <!--Importanto do BootStrap-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">    
+</head>
+<body>
+    <%- include  ('../../partials/navbar.ejs'); %> 
+
+    <div class="container">
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <h1>Cadastro de Categorias</h1>
+            </div>
+            <div class="card-body">
+                <form action="/admin/categories/save" method="POST">
+                    <input class="form-control" type="text" name="title" placeholder="Defina o título da categoria" required>
+                    <br>
+                    <button class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+    <%- include ('../../partials/dependencies.ejs'); %> 
+</html>

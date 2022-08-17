@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeveloperBlog | Homepage</title>
+
+    <!--Importanto do BootStrap-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">    
+</head>
+<body>
+    <%- include  ('partials/homenavbar.ejs'); %>
+
+    <div class="container">
+
+        <div>
+            Bem vindo ao Blog Favorito dos Desenvolvedores
+        </div>
+
+        <br>
+        <div class="jumbotron">
+            <h1 class="display-4">Bem vindo!</h1>
+            <p class="lead">Este é um simples blog para fins de estudo.</p>
+            <hr class="my-4">
+            <p>Este projeto faz uso de conceitos basicos do Javascript além de um CRUD completo.</p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="/about" role="button">Leia Mais</a>
+            </p>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <div class="dropdown float-right">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filtro de Categorias
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <% categories.forEach((category) => {%>
+                            <a class="dropdown-item" href="/category/<%=category.slug%>"><%=category.title%></a>
+                        <%});%>
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+
+        <% articles.forEach((article) => {%>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title%></h2>
+                </div>
+                <div class="card-body">
+                    <a href="/<%= article.slug%>" class="btn btn-success">Ler Artigo</a>
+                </div>
+            </div>
+        <% });%>
+
+        <br>
+        <div class="row">
+            <div class="col col-12">
+                <a href="/articles/page/2" style="float:right">Proximo >>></a>
+            </div>
+        </div>
+        <br>
+    </div>
+
+</body>
+    <%- include ('partials/dependencies.ejs'); %> 
+</html>

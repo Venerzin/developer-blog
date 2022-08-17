@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeveloperBlog | Categories</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <%- include  ('../../partials/navbar.ejs'); %> 
+    <div class="container">
+        <hr>
+        <h1>LISTANDO AS CATEGORIAS</h1>
+        <a class="btn btn-success" href="/admin/categories/new">Criar nova categoria</a>
+        <hr>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach((category, id) => {%>
+                    <tr>
+                        <th> <%= category.id %> </th>
+                        <th> <%= category.title %> </th>
+                        <th> <%= category.slug %> </th>
+                        <th>
+                            <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
+
+                            <form method="POST" action="/categories/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">
+                                <input type="hidden" name="id" value="<%= category.id %>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </th>
+                    </tr>
+                <%}); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+    <%- include ('../../partials/dependencies.ejs'); %> 
+</html>
+
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decisao = confirm("Você tem certeza que deseja deletar esta categoria?");
+
+        if(decisao){
+            form.submit();
+        }
+    }
+</script>

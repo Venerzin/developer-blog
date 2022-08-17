@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeveloperBlog | Usuarios</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <%- include  ('../../partials/navbar.ejs'); %> 
+    <div class="container">
+        <hr>
+        <h1>LISTA DE ADMINISTRADORES</h1>
+        <a class="btn btn-success" href="/admin/users/create">Criar novo usuário</a>
+        <hr>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user) => {%>
+                    <tr>
+                        <td> <%= user.id %> </td>
+                        <td> <%= user.email %> </td>
+                        <td>
+                            <a href="/admin/users/edit/<%= user.id%>" class="btn btn-warning">Editar</a>
+
+                            <form method="POST" action="/admin/users/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">
+                                <input type="hidden" name="id" value="<%= user.id %>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%}); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+    <%- include ('../../partials/dependencies.ejs'); %> 
+</html>
+
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decisao = confirm("Você tem certeza que deseja deletar este usuário?");
+
+        if(decisao){
+            form.submit();
+        }
+    }
+</script>
